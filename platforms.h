@@ -1,9 +1,8 @@
 #include <stdio.h>
-struct velocity {
+typedef struct velocity {
 	int vx;
 	int vy;
-};
-typedef struct velocity velocity;
+} velocity;
 
 typedef struct platform {
 	int x;
