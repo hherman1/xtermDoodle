@@ -1,7 +1,5 @@
-doodle: 	doodle.o platform.o
-	gcc doodle.o platform.o -o doodle
-platform.o:	platform.c
-	gcc -c platform.c
+doodle: 	doodle.o 
+	gcc doodle.o -o doodle
 doodle.o: doodle.c
 	gcc -c doodle.c
 doodle.c:
