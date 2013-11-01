@@ -1,0 +1,15 @@
+#include<stdio.h>
+
+typedef struct velocity velocity;
+struct velocity{
+  int vx;
+  int vy;
+};
+struct platform{
+  velocity 
+};
+
+
+void main(){
+  
+}
