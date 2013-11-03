@@ -7,14 +7,14 @@
 #define PLATFORMS_HEIGHT 1
 typedef enum bool {false,true} bool;
 
-typedef struct velocity {
+typedef struct Velocity {
 	int vx;
 	int vy;
-} velocity;
+} Velocity;
 
-typedef struct platform {
+typedef struct Platform {
 	int x;
 	int y;
-	velocity v;
+	Velocity v;
 	bool strong;
-} platform;
+} Platform;
