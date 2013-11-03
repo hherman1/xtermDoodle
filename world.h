@@ -1,12 +1,11 @@
-#include "platforms.h"
+#include "platform.h"
+#include "keyboard.h"
+#include "xterm_control.h"
 
 #define SCREEN_WIDTH 50
 #define SCREEN_HEIGHT 45
 
 
-typedef enum bool {
-	false,true;
-}
 
-bool isUsed(int x, int y);
-bool update();
+
+

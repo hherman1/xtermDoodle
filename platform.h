@@ -5,6 +5,7 @@
 
 #define PLATFORMS_WIDTH 3
 #define PLATFORMS_HEIGHT 1
+typedef enum bool {false,true} bool;
 
 typedef struct velocity {
 	int vx;
