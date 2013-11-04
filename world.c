@@ -53,7 +53,9 @@ static void generatePlatform(int row){
 		world[row][col+i] = (p.strong) ? PLATFORMS_STRONG : PLATFORMS_WEAK;
 	}
 }
-static bool isUsed(int x,int y);
+bool isUsed(int x,int y){
+	return true;
+}
 
 static void shiftWorldDown(){
 	int row,col;

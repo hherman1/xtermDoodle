@@ -4,7 +4,7 @@
 
 #define GAMESPEED_FAST 5
 #define GAMESPEED_SLOW 3
-static bool isUsed(int x,int y);
+bool isUsed(int x,int y);
 static bool needPlatform();
 static void generatePlatform(int row);
 static void shiftWorldDown();
