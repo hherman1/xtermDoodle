@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "unistd.h"
-#include "world.h"
 #include "doodler.h"
 
 void main(){
@@ -9,7 +8,7 @@ void main(){
 		//int c;
 		//while ((c = getkey()) == KEY_NOTHING) ;
 		updateWorld();
-		updateDoodler(c);
+		//updateDoodler(c);
 		int i;
 		for(i = 0; i < (6 * GAMESPEED_FAST/getGameSpeed()); i++){
 			int c = getkey();

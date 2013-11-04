@@ -2,21 +2,16 @@
 
 #define SCREEN_WIDTH 70
 #define SCREEN_HEIGHT 50
-
+#define MAX_PLATFORMS 50
 static char world[SCREEN_HEIGHT][SCREEN_WIDTH+1];
-static Platform* platforms;
+static Platform platforms[MAX_PLATFORMS];
 static int  numPlatforms = 0;
 static int tick = 0;
 static int gameSpeed= GAMESPEED_SLOW;
 void newgame(){
-	//init world array
-	int row,col;	
-	for(row = 0; row < SCREEN_HEIGHT; row++){
-		for(col = 0; col < SCREEN_WIDTH+1; col++){
-			world[row][col] = (col == SCREEN_WIDTH) ? '\n' : ' ';
-		}
-	}
-
+	blankWorld();
+	//initial platforms
+	int row;
 	for(row = 0; row < SCREEN_HEIGHT; row++){
 		if(row % gameSpeed == gameSpeed-PLATFORMS_HEIGHT) // makes bottom row have platform always
 			generatePlatform(row);
@@ -25,19 +20,44 @@ void newgame(){
 	redisplay();
 }
 void updateWorld(){
-	shiftWorldDown();
+	//shiftWorldDown();
 	redisplay();
 	tick++;
 }
+
 static void redisplay(){
+	//clear
 	xt_par2(XT_SET_ROW_COL_POS,1,1);
 	xt_par0(XT_CLEAR_SCREEN);
 	xt_par2(XT_SET_ROW_COL_POS,1,1);
+	blankWorld();
+	//insert platforms
+	int i;
+	for(i = 0; i < numPlatforms; i++){
+		insertPlatform(platforms[i]);
+	}
+	//display world
 	puts((char*)world);
-	
+	//instruction messages
 	puts("F5 or q = quit");
 	puts("F2 or 2 = fastspeed 	F3 or 3 = slowspeed");
 	printf("GameSpeed = %s\n", (gameSpeed == GAMESPEED_FAST) ? "fast" : "slow");
+}
+static void blankWorld(){
+	int row,col;	
+	for(row = 0; row < SCREEN_HEIGHT; row++){
+		for(col = 0; col < SCREEN_WIDTH+1; col++){
+			world[row][col] = (col == SCREEN_WIDTH) ? '\n' : ' ';
+		}
+	}
+}
+static void insertPlatform(Platform p){
+	int i,j;
+	for(i = 0; i < PLATFORMS_HEIGHT; i++){
+		for(j = 0; j < PLATFORMS_WIDTH; j++){
+			world[p.y+i][p.x+j] = (p.strong) ? PLATFORMS_STRONG : PLATFORMS_WEAK;
+		}
+	}
 }
 static bool needPlatform(){
 	if (tick >= gameSpeed){
@@ -52,12 +72,8 @@ static void generatePlatform(int row){
 	p.y = row;
 	p.strong = 1;
 	p.v.vx = p.v.vy = 0;
-	int i,j;
-	for(i = 0; i < PLATFORMS_HEIGHT; i++){
-		for(j = 0; j < PLATFORMS_WIDTH; j++){
-			world[row+i][col+j] = (p.strong) ? PLATFORMS_STRONG : PLATFORMS_WEAK;
-		}
-	}
+	platforms[numPlatforms++] = p;
+	insertPlatform(p);
 }
 bool isUsed(int x,int y){
 	return true;
