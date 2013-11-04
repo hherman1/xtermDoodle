@@ -80,7 +80,6 @@ static void generatePlatform(int row){
 	p.strong = 1;
 	p.v.vy = 0;
 	p.v.vx = (rand() % 2) ? 0 : gameSpeed / 10;
-
 	platforms[numPlatforms++] = p;
 	updatePlatform(&p);
 }

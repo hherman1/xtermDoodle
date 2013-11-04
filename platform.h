@@ -13,17 +13,10 @@ typedef struct Velocity {
 	int vx;
 	int vy;
 } Velocity;
-typedef struct Hitbox {
-	int x;
-	int y;
-	int width;
-	int height;
-}
 typedef struct Platform {
 	int x;
 	int y;
 	Velocity v;
-	Hitbox h;
 	bool strong;
 } Platform;
 #endif
