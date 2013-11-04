@@ -2,6 +2,9 @@
 #include "keyboard.h"
 #include "xterm_control.h"
 
+#define SCREEN_WIDTH 70
+#define SCREEN_HEIGHT 50
+#define MAX_PLATFORMS 50
 #define GAMESPEED_FAST 20
 #define GAMESPEED_SLOW 10
 

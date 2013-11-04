@@ -1,4 +1,4 @@
-doodle: 	doodle.o world.o doodler.o keyboard.o xterm_control.o 
+doodle: 	doodle.o world.o doodler.o keyboard.o xterm_control.o
 	gcc doodle.o world.o doodler.o keyboard.o xterm_control.o -o doodle
 doodle.o: doodle.c 
 	gcc -c doodle.c 
