@@ -88,8 +88,8 @@ static void shiftWorldDown(){
 	int row,col;
 	int i;
 	for(i = 0; i < numPlatforms; i++){
-		Platform p = platforms[i];
-		if(++p.y > SCREEN_HEIGHT - PLATFORMS_HEIGHT)
+		//Platform p = platforms[i];
+		if(++(platforms[i].y) > SCREEN_HEIGHT - PLATFORMS_HEIGHT)
 			removePlatform(i);
 	}
 	if(needPlatform())
