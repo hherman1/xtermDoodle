@@ -4,7 +4,9 @@
 #include "platform.h"
 
 #define DOODLER_SHAPE " "
-#define JUMP_SPEED 1
+#define JUMP_SPEED 4
+#define MOVEMENT_SPEED 2
+
 typedef struct Doodler {
 	int x;
 	int y;
