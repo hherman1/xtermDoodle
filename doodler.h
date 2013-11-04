@@ -8,6 +8,7 @@
 typedef struct Doodler {
 	int x;
 	int y;
+	bool alive;
 	Velocity v;
 } Doodler;
 Doodler updateDoodler(int key, Doodler *d);

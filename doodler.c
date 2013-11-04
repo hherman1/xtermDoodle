@@ -45,5 +45,6 @@ Doodler newDoodler() {
 	d.y = 10;
 	d.v.vy = 1;
 	d.v.vx = 1;
+	d.alive = true;
 	return d;
 }

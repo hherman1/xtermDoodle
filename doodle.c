@@ -19,7 +19,7 @@ void main(){
 
 	Doodler doodles = newDoodler();
 
-	while(1){
+	while(doodles.alive){
 		int i;
 		int c = getkey();
 		
