@@ -32,9 +32,9 @@ Doodler updateDoodler(int key, Doodler *d) {
 	if(d->v.vy > 2) {
 		d->v.vy = 2;
 	}
-	/*if(isUsed(d->x,d->y)) {
-		d->vy = JUMP_SPEED;
-	}*/
+	if(isUsed(d->x,d->y)) {
+		d->vy = -1 * JUMP_SPEED;
+	}
 
 	if(d->y > SCREEN_HEIGHT) {
 		d->alive = false;
@@ -43,6 +43,7 @@ Doodler updateDoodler(int key, Doodler *d) {
 		d->x = SCREEN_WIDTH - d->x;
 	}
 	
+
 	drawDoodler(*d);
 	return *d;
 }
