@@ -33,9 +33,9 @@ static void redisplay(){
 	for(i = 0; i < numPlatforms; i++){
 		updatePlatform(&(platforms[i]));
 	}
-	//display world
-	puts((char*)world);
+	//puts((char*)world);
 	//instruction messages
+	xt_par2(XT_SET_ROW_COL_POS,SCREEN_HEIGHT+1,0);
 	puts("F5 or q = quit");
 	puts("F2 or 2 = fastspeed 	F3 or 3 = slowspeed");
 	printf("GameSpeed = %s\n", (gameSpeed == GAMESPEED_FAST) ? "fast" : "slow");
@@ -60,12 +60,17 @@ static void updatePlatform(Platform* p){
 		p->v.vx *= -1;
 	}
 	//insert in platforms array
+	xt_par0(p->color);
 	int i,j;
 	for(i = 0; i < PLATFORMS_HEIGHT; i++){
 		for(j = 0; j < PLATFORMS_WIDTH; j++){
-			world[p->y+i][p->x+j] = (p->strong) ? PLATFORMS_STRONG : PLATFORMS_WEAK;
+			int row = p->y+i, col = p->x+j;
+			//prints
+			xt_par2(XT_SET_ROW_COL_POS,row,col);
+			putchar(world[row][col] = (p->strong) ? PLATFORMS_STRONG : PLATFORMS_WEAK);
 		}
 	}
+	xt_par0(XT_CH_NORMAL);
 }
 static bool needPlatform(){
 	if (tick >= gameSpeed){
@@ -80,7 +85,9 @@ static void generatePlatform(int row){
 	p.strong = 1;
 	p.v.vy = 0;
 	p.v.vx = (rand() % 2) ? 0 : gameSpeed / 10;
-
+	p.color = (p.v.vx) ? XT_CH_BLUE : XT_CH_GREEN;
+	if(!p.strong)
+		p.color = XT_CH_WHITE;
 	platforms[numPlatforms++] = p;
 	updatePlatform(&p);
 }
