@@ -20,7 +20,6 @@ void main(){
 	Doodler doodles = newDoodler();
 
 	while(1){
-		
 		int i;
 		int c = getkey();
 		

@@ -2,22 +2,21 @@
 
 #define SCREEN_WIDTH 70
 #define SCREEN_HEIGHT 50
-
+#define MAX_PLATFORMS 50
 static char world[SCREEN_HEIGHT][SCREEN_WIDTH+1];
-static Platform* platforms;
+static Platform platforms[MAX_PLATFORMS];
 static int  numPlatforms = 0;
 static int tick = 0;
 static int gameSpeed= GAMESPEED_SLOW;
 void newgame(){
-	//init world array
-	int row,col;	
+	blankWorld();
+	//initial platforms
+	int row;
 	for(row = 0; row < SCREEN_HEIGHT; row++){
-		for(col = 0; col < SCREEN_WIDTH+1; col++){
-			world[row][col] = (col == SCREEN_WIDTH) ? '\n' : ' ';
-		}
-		if(row % gameSpeed == gameSpeed-1) // makes bottom row have platform always
+		if(row % gameSpeed == gameSpeed-PLATFORMS_HEIGHT) // makes bottom row have platform always
 			generatePlatform(row);
 	}
+	
 	redisplay();
 }
 void updateWorld(){
@@ -25,15 +24,50 @@ void updateWorld(){
 	redisplay();
 	tick++;
 }
+
 static void redisplay(){
+	//clear
 	xt_par2(XT_SET_ROW_COL_POS,1,1);
 	xt_par0(XT_CLEAR_SCREEN);
 	xt_par2(XT_SET_ROW_COL_POS,1,1);
+	blankWorld();
+	//update platforms
+	int i;
+	for(i = 0; i < numPlatforms; i++){
+		updatePlatform(platforms[i]);
+	}
+	//display world
 	puts((char*)world);
-	
-	puts("F5 = quit");
-	puts("F2 = fastspeed F3 = slowspeed");
+	//instruction messages
+	puts("F5 or q = quit");
+	puts("F2 or 2 = fastspeed 	F3 or 3 = slowspeed");
 	printf("GameSpeed = %s\n", (gameSpeed == GAMESPEED_FAST) ? "fast" : "slow");
+}
+static void blankWorld(){
+	int row,col;	
+	for(row = 0; row < SCREEN_HEIGHT; row++){
+		for(col = 0; col < SCREEN_WIDTH+1; col++){
+			world[row][col] = (col == SCREEN_WIDTH) ? '\n' : ' ';
+		}
+	}
+}
+static void updatePlatform(Platform p){
+	p.x = p.v.vx;
+	//p.y += p.v.vy;
+	if(p.x > SCREEN_WIDTH){
+		p.x = SCREEN_WIDTH - (p.x - SCREEN_WIDTH);
+		p.v.vx *= -1;
+	}else if(p.x < 0){
+		p.x = 0 + (0 - p.x);
+		p.v.vx *= -1;
+	}
+	//insert in platforms array
+	int i,j;
+	for(i = 0; i < PLATFORMS_HEIGHT; i++){
+		for(j = 0; j < PLATFORMS_WIDTH; j++){
+			world[p.y+i][p.x+j] = (p.strong) ? PLATFORMS_STRONG : PLATFORMS_WEAK;
+		}
+	}
 }
 static bool needPlatform(){
 	if (tick >= gameSpeed){
@@ -47,26 +81,29 @@ static void generatePlatform(int row){
 	p.x = col;
 	p.y = row;
 	p.strong = 1;
-	p.v.vx = p.v.vy = 0;
-	int i,j;
-	for(i = 0; i < PLATFORMS_HEIGHT; i++){
-		for(j = 0; j < PLATFORMS_WIDTH; j++){
-			world[row+i][col+j] = (p.strong) ? PLATFORMS_STRONG : PLATFORMS_WEAK;
-		}
-	}
+	p.v.vy = 0;
+	p.v.vx = 2;//(rand() % 2) ? 0 : gameSpeed / 8;
+
+	platforms[numPlatforms++] = p;
+	updatePlatform(p);
 }
 bool isUsed(int x,int y){
 	return true;
 }
 
+static void removePlatform(int pos){
+	for(pos; pos < numPlatforms; pos++)
+		platforms[pos] = platforms[pos+1];
+	numPlatforms--;
+}
 static void shiftWorldDown(){
 	int row,col;
-	for(row = SCREEN_HEIGHT-1; row > 0; row--)
-		for(col = 0; col < SCREEN_WIDTH; col++){
-			world[row][col] = world[row-1][col];
-		}
-	for(col = 0; col < SCREEN_WIDTH; col++)
-		world[0][col] = ' ';
+	int i;
+	for(i = 0; i < numPlatforms; i++){
+		//Platform p = platforms[i];
+		if(++(platforms[i].y) > SCREEN_HEIGHT - PLATFORMS_HEIGHT)
+			removePlatform(i);
+	}
 	if(needPlatform())
 		generatePlatform(0);
 }
