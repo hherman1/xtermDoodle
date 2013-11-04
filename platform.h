@@ -3,7 +3,7 @@
 #define PLATFORMS_STRONG '='
 #define PLATFORMS_WEAK '#'
 
-#define PLATFORMS_WIDTH 3
+#define PLATFORMS_WIDTH 5
 #define PLATFORMS_HEIGHT 1
 typedef enum bool {false,true} bool;
 
