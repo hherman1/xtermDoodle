@@ -4,11 +4,13 @@
 
 void main(){
 	newgame();
-	while(1){
-		int c = getkey();
-		if(c == KEY_F5) break;
-		updateWorld();
-		usleep(500);
-	}
-	getkey_terminate();
+	//while(1){
+	//	//int c;
+	//	int c = getkey();
+	//	//while ((c = getkey()) == KEY_NOTHING) ;
+	//	if(c == KEY_F5) break;
+	//	updateWorld();
+	//	usleep(1500);
+	//}
+	//getkey_terminate();
 }

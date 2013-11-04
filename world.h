@@ -4,8 +4,9 @@
 
 static bool isUsed(int x,int y);
 static bool needPlatform();
-static void generatePlatform();
+static void generatePlatform(int row);
 static void shiftWorldDown();
+static void redisplay();
 void newgame();
 void updateWorld();
 
