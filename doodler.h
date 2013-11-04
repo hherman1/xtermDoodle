@@ -1,12 +1,12 @@
-#include "world.h"
 
+#include "keyboard.h"
+#include "xterm_control.h"
 #define JUMP_SPEED 1
-
 typedef struct Doodler {
 	int x;
 	int y;
 	int vy;
-}Doodler;
-void updateDoodler(int key, Doodler d);
-
+} Doodler;
+Doodler updateDoodler(int key, Doodler *d);
+Doodler newDoodler();
 

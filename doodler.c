@@ -1,4 +1,7 @@
 #include "doodler.h"
+static void drawDoodler(Doodler d) {
+	xt_par2(XT_SET_ROW_COL_POS,d.x,d.y);
+}
 
 Doodler updateDoodler(int key, Doodler *d) {
 	d->y += d->vy;
@@ -18,6 +21,10 @@ Doodler updateDoodler(int key, Doodler *d) {
 	drawDoodler(*d);
 	return *d;
 }
-static void drawDoodler(Doodler d) {
-	xt_par2(XT_SET_ROW_COL_POS,d.x,d.y);
+Doodler newDoodler() {
+	Doodler d;
+	d.x = 1;
+	d.y = 1;
+	d.vy = 0;
+	return d;
 }

@@ -20,7 +20,7 @@ void newgame(){
 	redisplay();
 }
 void updateWorld(){
-	//shiftWorldDown();
+	shiftWorldDown();
 	redisplay();
 	tick++;
 }
@@ -31,10 +31,10 @@ static void redisplay(){
 	xt_par0(XT_CLEAR_SCREEN);
 	xt_par2(XT_SET_ROW_COL_POS,1,1);
 	blankWorld();
-	//insert platforms
+	//update platforms
 	int i;
 	for(i = 0; i < numPlatforms; i++){
-		insertPlatform(platforms[i]);
+		updatePlatform(platforms[i]);
 	}
 	//display world
 	puts((char*)world);
@@ -51,7 +51,7 @@ static void blankWorld(){
 		}
 	}
 }
-static void insertPlatform(Platform p){
+static void updatePlatform(Platform p){
 	int i,j;
 	for(i = 0; i < PLATFORMS_HEIGHT; i++){
 		for(j = 0; j < PLATFORMS_WIDTH; j++){
@@ -73,20 +73,25 @@ static void generatePlatform(int row){
 	p.strong = 1;
 	p.v.vx = p.v.vy = 0;
 	platforms[numPlatforms++] = p;
-	insertPlatform(p);
+	updatePlatform(p);
 }
 bool isUsed(int x,int y){
 	return true;
 }
 
+static void removePlatform(int pos){
+	for(pos; pos < numPlatforms; pos++)
+		platforms[pos] = platforms[pos+1];
+	numPlatforms--;
+}
 static void shiftWorldDown(){
 	int row,col;
-	for(row = SCREEN_HEIGHT-1; row > 0; row--)
-		for(col = 0; col < SCREEN_WIDTH; col++){
-			world[row][col] = world[row-1][col];
-		}
-	for(col = 0; col < SCREEN_WIDTH; col++)
-		world[0][col] = ' ';
+	int i;
+	for(i = 0; i < numPlatforms; i++){
+		Platform p = platforms[i];
+		if(++p.y > SCREEN_HEIGHT - PLATFORMS_HEIGHT)
+			removePlatform(i);
+	}
 	if(needPlatform())
 		generatePlatform(0);
 }
