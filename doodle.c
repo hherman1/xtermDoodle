@@ -13,8 +13,11 @@ void main(){
 		if(c == KEY_F5) break;
 		updateWorld();
 
-		for(i = 0; i <= 15 / gameSpeed; i++)
-			usleep(100000);
+		usleep(100000);
+		usleep(100000);
+		usleep(100000);
+		usleep(100000);
+		usleep(100000);
 	}
 	getkey_terminate();
 }
