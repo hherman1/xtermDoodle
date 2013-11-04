@@ -1,6 +1,8 @@
 
 #include "keyboard.h"
 #include "xterm_control.h"
+
+#define DOODLER_SHAPE " "
 #define JUMP_SPEED 1
 typedef struct Doodler {
 	int x;
