@@ -9,7 +9,7 @@ void main(){
 		int c = getkey();
 		//while ((c = getkey()) == KEY_NOTHING) ;
 		if(c == KEY_F5 || c == 'q') break;
-		else if(c == KEY_F2 || c == 'a') setGameSpeed(GAMESPEED_FAST);
+		else if(c == KEY_F2 ) setGameSpeed(GAMESPEED_FAST);
 		else if(c == KEY_F3) setGameSpeed(GAMESPEED_SLOW);
 		updateWorld();
 		int i;
