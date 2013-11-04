@@ -15,9 +15,13 @@ void newgame(){
 		for(col = 0; col < SCREEN_WIDTH+1; col++){
 			world[row][col] = (col == SCREEN_WIDTH) ? '\n' : ' ';
 		}
-		if(row % gameSpeed == gameSpeed-1) // makes bottom row have platform always
+	}
+
+	for(row = 0; row < SCREEN_HEIGHT; row++){
+		if(row % gameSpeed == gameSpeed-PLATFORMS_HEIGHT) // makes bottom row have platform always
 			generatePlatform(row);
 	}
+	
 	redisplay();
 }
 void updateWorld(){
@@ -31,8 +35,8 @@ static void redisplay(){
 	xt_par2(XT_SET_ROW_COL_POS,1,1);
 	puts((char*)world);
 	
-	puts("F5 = quit");
-	puts("F2 = fastspeed F3 = slowspeed");
+	puts("F5 or q = quit");
+	puts("F2 or 2 = fastspeed 	F3 or 3 = slowspeed");
 	printf("GameSpeed = %s\n", (gameSpeed == GAMESPEED_FAST) ? "fast" : "slow");
 }
 static bool needPlatform(){
