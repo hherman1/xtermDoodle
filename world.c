@@ -1,8 +1,5 @@
 #include "world.h"
 
-#define SCREEN_WIDTH 70
-#define SCREEN_HEIGHT 50
-#define MAX_PLATFORMS 50
 static char world[SCREEN_HEIGHT][SCREEN_WIDTH+1];
 static Platform platforms[MAX_PLATFORMS];
 static int  numPlatforms = 0;

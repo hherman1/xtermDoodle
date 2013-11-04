@@ -18,15 +18,15 @@ Doodler updateDoodler(int key, Doodler *d) {
 	
 	switch(key) {
 		case KEY_LEFT:
-			d->v.vx = -1;
+			d->v.vx = -1 * MOVEMENT_SPEED;
 			break;
 		case KEY_RIGHT:
-			d->v.vx = 1;
+			d->v.vx = MOVEMENT_SPEED;
 			//d->x += d->vx;//d->vx;
 			//d->x ++;
 			break;
 		case KEY_UP:
-			d->v.vy = -5;
+			d->v.vy = -1 * JUMP_SPEED;
 			break;
 	}
 	if(d->v.vy > 2) {
@@ -35,6 +35,14 @@ Doodler updateDoodler(int key, Doodler *d) {
 	/*if(isUsed(d->x,d->y)) {
 		d->vy = JUMP_SPEED;
 	}*/
+
+	if(d->y > SCREEN_HEIGHT) {
+		d->alive = false;
+	}
+	if(d->x < SCREEN_WIDTH || d->x > SCREEN_WIDTH) {
+		d->x = SCREEN_WIDTH - d->x;
+	}
+	
 	drawDoodler(*d);
 	return *d;
 }
