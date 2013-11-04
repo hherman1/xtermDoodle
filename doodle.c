@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "unistd.h"
 #include "world.h"
+#include "doodler.h"
 
 void main(){
 	newgame();
@@ -12,6 +13,7 @@ void main(){
 		else if(c == KEY_F2 ) setGameSpeed(GAMESPEED_FAST);
 		else if(c == KEY_F3) setGameSpeed(GAMESPEED_SLOW);
 		updateWorld();
+		updateDoodler(c);
 		int i;
 		for(i = 0; i <= 15 / getGameSpeed(); i++)
 			usleep(100000);
