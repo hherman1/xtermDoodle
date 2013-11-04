@@ -85,7 +85,7 @@ static void generatePlatform(int row){
 	updatePlatform(&p);
 }
 bool isUsed(int x,int y){
-	return true;
+	return world[y][x] != ' ' || world[y][x+1] != ' ' || world[y][x-1] != ' ';
 }
 
 static void removePlatform(int pos){

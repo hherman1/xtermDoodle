@@ -6,7 +6,7 @@ static void drawDoodler(Doodler d) {
 	xt_par2(XT_SET_ROW_COL_POS,d.y,d.x);
 	xt_par0(XT_BG_RED);
 	//printf("doodler");
-	puts("doodler");
+	puts(DOODLER_SHAPE);
 	xt_par0(XT_BG_DEFAULT);
 
 }
@@ -33,7 +33,7 @@ Doodler updateDoodler(int key, Doodler *d) {
 		d->v.vy = 2;
 	}
 	if(isUsed(d->x,d->y)) {
-		//d->v.vy = -1 * JUMP_SPEED;
+		d->v.vy = -1 * JUMP_SPEED;
 	}
 
 	if(d->y > SCREEN_HEIGHT) {
