@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include "doodler.h"
+
 static void drawDoodler(Doodler d) {
 	xt_par2(XT_SET_ROW_COL_POS,1,1);
 	xt_par2(XT_SET_ROW_COL_POS,d.y,d.x);
@@ -10,13 +12,9 @@ static void drawDoodler(Doodler d) {
 }
 
 Doodler updateDoodler(int key, Doodler *d) {
-	drawDoodler(*d);
-	d->v.vy = 1;
 	d->x += d->v.vx;
 	d->y += d->v.vy;
-	//d->x += d->vx * 2 ;
-	//d->x += d->vx;
-	//d->vy ++;
+	d->v.vy ++;
 	
 	switch(key) {
 		case KEY_LEFT:
@@ -34,10 +32,10 @@ Doodler updateDoodler(int key, Doodler *d) {
 	if(d->v.vy > 2) {
 		d->v.vy = 2;
 	}
-	//d->v.vy = 1;
 	/*if(isUsed(d->x,d->y)) {
 		d->vy = JUMP_SPEED;
 	}*/
+	drawDoodler(*d);
 	return *d;
 }
 
