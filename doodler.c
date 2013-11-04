@@ -33,7 +33,7 @@ Doodler updateDoodler(int key, Doodler *d) {
 		d->v.vy = 2;
 	}
 	if(isUsed(d->x,d->y)) {
-		d->v.vy = -1 * JUMP_SPEED;
+		//d->v.vy = -1 * JUMP_SPEED;
 	}
 
 	if(d->y > SCREEN_HEIGHT) {

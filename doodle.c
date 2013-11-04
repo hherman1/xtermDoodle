@@ -14,9 +14,12 @@ void main(){
 	newgame();
 	struct timeval t;
 	gettimeofday(&t,NULL);
+	
+	int distance = 0;
+	
 	unsigned long long time = currentTime(t);
 	unsigned long long updateTime = time + FRAME_LENGTH;
-
+	
 	Doodler doodles = newDoodler();
 
 	while(doodles.alive){
