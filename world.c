@@ -59,7 +59,9 @@ static void generatePlatform(int row){
 		}
 	}
 }
-static bool isUsed(int x,int y);
+bool isUsed(int x,int y){
+	return true;
+}
 
 static void shiftWorldDown(){
 	int row,col;
