@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#ifndef PLATFORMS_H
+#define PLATFORMS_H
 #define PLATFORMS_STRONG '='
 #define PLATFORMS_WEAK '#'
 
@@ -18,3 +20,4 @@ typedef struct Platform {
 	Velocity v;
 	bool strong;
 } Platform;
+#endif
