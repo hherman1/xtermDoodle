@@ -2,8 +2,8 @@
 #include "keyboard.h"
 #include "xterm_control.h"
 
-#define GAMESPEED_FAST 5
-#define GAMESPEED_SLOW 3
+#define GAMESPEED_FAST 20
+#define GAMESPEED_SLOW 10
 bool isUsed(int x,int y);
 static bool needPlatform();
 static void generatePlatform(int row);

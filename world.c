@@ -1,7 +1,7 @@
 #include "world.h"
 
-#define SCREEN_WIDTH 15
-#define SCREEN_HEIGHT 25
+#define SCREEN_WIDTH 70
+#define SCREEN_HEIGHT 50
 
 static char world[SCREEN_HEIGHT][SCREEN_WIDTH+1];
 static Platform* platforms;
@@ -48,9 +48,11 @@ static void generatePlatform(int row){
 	p.y = row;
 	p.strong = 1;
 	p.v.vx = p.v.vy = 0;
-	int i;
-	for(i = 0; i < 3; i++){
-		world[row][col+i] = (p.strong) ? PLATFORMS_STRONG : PLATFORMS_WEAK;
+	int i,j;
+	for(i = 0; i < PLATFORMS_HEIGHT; i++){
+		for(j = 0; j < PLATFORMS_WIDTH; j++){
+			world[row+i][col+j] = (p.strong) ? PLATFORMS_STRONG : PLATFORMS_WEAK;
+		}
 	}
 }
 bool isUsed(int x,int y){
