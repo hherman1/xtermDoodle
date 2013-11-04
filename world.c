@@ -1,9 +1,8 @@
 #include "world.h"
 
-#define SCREEN_WIDTH 10
+#define SCREEN_WIDTH 15
 #define SCREEN_HEIGHT 25
-#define GAMESPEED_FAST 5
-#define GAMESPEED_SLOW 3
+
 static char world[SCREEN_HEIGHT][SCREEN_WIDTH+1];
 static Platform* platforms;
 static int  numPlatforms = 0;
@@ -30,7 +29,11 @@ static void redisplay(){
 	xt_par2(XT_SET_ROW_COL_POS,1,1);
 	xt_par0(XT_CLEAR_SCREEN);
 	xt_par2(XT_SET_ROW_COL_POS,1,1);
-	printf((char*)world);
+	puts((char*)world);
+	
+	puts("F5 = quit");
+	puts("F2 = fastspeed F3 = slowspeed");
+	printf("GameSpeed = %s\n", (gameSpeed == GAMESPEED_FAST) ? "fast" : "slow");
 }
 static bool needPlatform(){
 	if (tick >= gameSpeed){
@@ -39,7 +42,7 @@ static bool needPlatform(){
 	return !tick;
 }
 static void generatePlatform(int row){
-	int col = rand() % (SCREEN_WIDTH - PLATFORMS_HEIGHT);
+	int col = rand() % (SCREEN_WIDTH - PLATFORMS_WIDTH);
 	Platform p;
 	p.x = col;
 	p.y = row;
@@ -62,4 +65,12 @@ static void shiftWorldDown(){
 		world[0][col] = ' ';
 	if(needPlatform())
 		generatePlatform(0);
+}
+
+void setGameSpeed(int speed){
+	if (speed == GAMESPEED_FAST || speed == GAMESPEED_SLOW)
+		gameSpeed = speed;
+}
+int getGameSpeed(){
+	return gameSpeed;
 }
