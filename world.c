@@ -14,7 +14,7 @@ void newgame(){
 	int row,col;	
 	for(row = 0; row < SCREEN_HEIGHT; row++){
 		for(col = 0; col < SCREEN_WIDTH+1; col++){
-			world[row][col] = (col == SCREEN_WIDTH) ? '\n' : '-';
+			world[row][col] = (col == SCREEN_WIDTH) ? '\n' : ' ';
 		}
 		if(row % gameSpeed == gameSpeed-1) // makes bottom row have platform always
 			generatePlatform(row);
@@ -33,7 +33,10 @@ static void redisplay(){
 	printf((char*)world);
 }
 static bool needPlatform(){
-	return (tick > gameSpeed);
+	if (tick >= gameSpeed){
+		tick = 0;
+	}
+	return !tick;
 }
 static void generatePlatform(int row){
 	int col = rand() % (SCREEN_WIDTH - PLATFORMS_HEIGHT);
@@ -51,12 +54,12 @@ static bool isUsed(int x,int y);
 
 static void shiftWorldDown(){
 	int row,col;
-	for(row = SCREEN_HEIGHT-1; row > 1; row--)
+	for(row = SCREEN_HEIGHT-1; row > 0; row--)
 		for(col = 0; col < SCREEN_WIDTH; col++){
 			world[row][col] = world[row-1][col];
 		}
 	for(col = 0; col < SCREEN_WIDTH; col++)
-		world[0][1] = ' ';
+		world[0][col] = ' ';
 	if(needPlatform())
 		generatePlatform(0);
 }
