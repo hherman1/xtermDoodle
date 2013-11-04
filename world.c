@@ -52,6 +52,16 @@ static void blankWorld(){
 	}
 }
 static void updatePlatform(Platform p){
+	p.x = p.v.vx;
+	//p.y += p.v.vy;
+	if(p.x > SCREEN_WIDTH){
+		p.x = SCREEN_WIDTH - (p.x - SCREEN_WIDTH);
+		p.v.vx *= -1;
+	}else if(p.x < 0){
+		p.x = 0 + (0 - p.x);
+		p.v.vx *= -1;
+	}
+	//insert in platforms array
 	int i,j;
 	for(i = 0; i < PLATFORMS_HEIGHT; i++){
 		for(j = 0; j < PLATFORMS_WIDTH; j++){
@@ -71,7 +81,9 @@ static void generatePlatform(int row){
 	p.x = col;
 	p.y = row;
 	p.strong = 1;
-	p.v.vx = p.v.vy = 0;
+	p.v.vy = 0;
+	p.v.vx = 2;//(rand() % 2) ? 0 : gameSpeed / 8;
+
 	platforms[numPlatforms++] = p;
 	updatePlatform(p);
 }
