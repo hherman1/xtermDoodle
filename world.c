@@ -96,15 +96,17 @@ Platform* getPlatform(int x, int y) {
 	Platform *ans = NULL;
 	int i;
 	for(i = 0; i < numPlatforms;i++) {
-		if(contains(*search,x,y))
+		if(contains(*search,x,y)) {
+			
 			ans = search;
 			break;
+		}
 		search++;
 	}
 	return ans;
 }
 static bool contains(Platform p, int x, int y) {
-	return (x <= p.x + PLATFORMS_WIDTH && x >= p.x) && ( y <= p.y + PLATFORMS_HEIGHT + 2 && y >= p.y - 1);
+	return (x <= p.x + PLATFORMS_WIDTH && x >= p.x)  && ( y >= p.y - PLATFORMS_HEIGHT && y <= p.y);
 }
 static void removePlatform(int pos){
 	for(pos; pos < numPlatforms; pos++)

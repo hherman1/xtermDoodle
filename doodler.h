@@ -5,9 +5,10 @@
 #include "world.h"
 
 #define DOODLER_SHAPE " "
-#define JUMP_SPEED 4
+#define JUMP_SPEED 6
 #define MOVEMENT_SPEED 2
 
+#define PF_DEBUG 0
 typedef struct Doodler {
 	int x;
 	int y;
