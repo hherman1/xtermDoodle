@@ -20,7 +20,7 @@ void newgame(){
 	redisplay();
 }
 void updateWorld(){
-	shiftWorldDown();
+	//shiftWorldDown();
 	redisplay();
 	tick++;
 }
@@ -34,7 +34,7 @@ static void redisplay(){
 	//update platforms
 	int i;
 	for(i = 0; i < numPlatforms; i++){
-		updatePlatform(platforms[i]);
+		updatePlatform(&(platforms[i]));
 	}
 	//display world
 	puts((char*)world);
@@ -51,21 +51,22 @@ static void blankWorld(){
 		}
 	}
 }
-static void updatePlatform(Platform p){
-	p.x = p.v.vx;
-	//p.y += p.v.vy;
-	if(p.x > SCREEN_WIDTH){
-		p.x = SCREEN_WIDTH - (p.x - SCREEN_WIDTH);
-		p.v.vx *= -1;
-	}else if(p.x < 0){
-		p.x = 0 + (0 - p.x);
-		p.v.vx *= -1;
+static void updatePlatform(Platform* p){
+	p->x += p->v.vx;
+	//p->y += p->v.vy;
+	int max_x = SCREEN_WIDTH - PLATFORMS_WIDTH;
+	if(p->x >= (max_x)) {
+		p->x = max_x - (p->x - max_x);
+		p->v.vx *= -1;
+	}else if(p->x < 0){
+		p->x = 0 + (0 - p->x);
+		p->v.vx *= -1;
 	}
 	//insert in platforms array
 	int i,j;
 	for(i = 0; i < PLATFORMS_HEIGHT; i++){
 		for(j = 0; j < PLATFORMS_WIDTH; j++){
-			world[p.y+i][p.x+j] = (p.strong) ? PLATFORMS_STRONG : PLATFORMS_WEAK;
+			world[p->y+i][p->x+j] = (p->strong) ? PLATFORMS_STRONG : PLATFORMS_WEAK;
 		}
 	}
 }
@@ -76,16 +77,15 @@ static bool needPlatform(){
 	return !tick;
 }
 static void generatePlatform(int row){
-	int col = rand() % (SCREEN_WIDTH - PLATFORMS_WIDTH);
 	Platform p;
-	p.x = col;
+	p.x = rand() % (SCREEN_WIDTH - PLATFORMS_WIDTH);
 	p.y = row;
 	p.strong = 1;
 	p.v.vy = 0;
-	p.v.vx = 2;//(rand() % 2) ? 0 : gameSpeed / 8;
+	p.v.vx = 1;//(rand() % 2) ? 0 : gameSpeed / 8;
 
 	platforms[numPlatforms++] = p;
-	updatePlatform(p);
+	updatePlatform(&p);
 }
 bool isUsed(int x,int y){
 	return true;

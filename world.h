@@ -10,7 +10,7 @@ static void generatePlatform(int row);
 static void shiftWorldDown();
 static void redisplay();
 static void blankWorld();
-static void updatePlatform(Platform p);
+static void updatePlatform(Platform* p);
 static void removePlatform(int pos);
 void newgame();
 void updateWorld();
