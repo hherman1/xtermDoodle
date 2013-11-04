@@ -17,7 +17,7 @@ Doodler updateDoodler(int key, Doodler *d) {
 	d->y += d->v.vy;
 	d->v.vy ++;
 	
-	Platform *contact = getPlatform(d->x,d->y);	
+	Platform *contact = getPlatform(d->x,d->y + d->v.vy);	
 	printf("%p",contact);
 	
 	switch(key) {
@@ -38,6 +38,7 @@ Doodler updateDoodler(int key, Doodler *d) {
 	}
 	if(contact != NULL) {
 		d->v.vy = -1 * JUMP_SPEED;
+		d->y = contact->y - PLATFORMS_HEIGHT - 2;
 	}
 	if(d->x < 0 || d->x > SCREEN_WIDTH) {
 		d->x = SCREEN_WIDTH - d->x;
