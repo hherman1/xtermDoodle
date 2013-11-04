@@ -16,6 +16,9 @@ Doodler updateDoodler(int key, Doodler *d) {
 	d->y += d->v.vy;
 	d->v.vy ++;
 	
+	Platform *contact = getPlatform(d->x,d->y);	
+	printf("%p",contact);
+	
 	switch(key) {
 		case KEY_LEFT:
 			d->v.vx = -1 * MOVEMENT_SPEED;
@@ -32,10 +35,10 @@ Doodler updateDoodler(int key, Doodler *d) {
 	if(d->v.vy > 2) {
 		d->v.vy = 2;
 	}
-	if(isUsed(d->x,d->y)) {
+	
+	if(contact != NULL) {
 		d->v.vy = -1 * JUMP_SPEED;
 	}
-
 	if(d->y > SCREEN_HEIGHT) {
 		d->alive = false;
 	}

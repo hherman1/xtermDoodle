@@ -83,10 +83,21 @@ static void generatePlatform(int row){
 	platforms[numPlatforms++] = p;
 	updatePlatform(&p);
 }
-bool isUsed(int x,int y){
-	return world[y][x] != ' ' || world[y][x+1] != ' ' || world[y][x-1] != ' ';
+Platform* getPlatform(int x, int y) {
+	Platform *search = platforms;
+	Platform *ans = NULL;
+	int i;
+	for(i = 0; i < numPlatforms;i++) {
+		if(contains(*search,x,y))
+			ans = search;
+			break;
+		search++;
+	}
+	return ans;
 }
-
+static bool contains(Platform p, int x, int y) {
+	return (x <= p.x + PLATFORMS_WIDTH && x >= p.x) && ( y <= p.y + PLATFORMS_HEIGHT + 2 && y >= p.y - 1);
+}
 static void removePlatform(int pos){
 	for(pos; pos < numPlatforms; pos++)
 		platforms[pos] = platforms[pos+1];
