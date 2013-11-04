@@ -2,6 +2,7 @@
 #include "keyboard.h"
 #include "xterm_control.h"
 #include "platform.h"
+#include "world.h"
 
 #define DOODLER_SHAPE " "
 #define JUMP_SPEED 4

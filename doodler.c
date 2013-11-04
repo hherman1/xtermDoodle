@@ -39,7 +39,7 @@ Doodler updateDoodler(int key, Doodler *d) {
 	if(d->y > SCREEN_HEIGHT) {
 		d->alive = false;
 	}
-	if(d->x < SCREEN_WIDTH || d->x > SCREEN_WIDTH) {
+	if(d->x < 0 || d->x > SCREEN_WIDTH) {
 		d->x = SCREEN_WIDTH - d->x;
 	}
 	
