@@ -26,7 +26,7 @@ void main(){
 		int i;
 		int c = getkey();
 		
-		updateWorld();
+		updateWorld(doodles, &distance);
 		updateDoodler(c,&doodles);
 		if(c == KEY_F5 || c == 'q') {
 			getkey_terminate();
@@ -41,5 +41,11 @@ void main(){
 		}
 		updateTime = time + FRAME_LENGTH;
 	}
+	
+	xt_par0(XT_CLEAR_SCREEN);
+	xt_par0(XT_BG_DEFAULT);
+	printf("Game over! Your score was: %i\n", distance);
+	usleep(1000000);
+	int cc;
 	getkey_terminate();
 }

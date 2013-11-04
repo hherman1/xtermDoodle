@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "doodler.h"
+#include "game.h"
 
 static void drawDoodler(Doodler d) {
 	xt_par2(XT_SET_ROW_COL_POS,1,1);
@@ -35,15 +36,14 @@ Doodler updateDoodler(int key, Doodler *d) {
 	if(d->v.vy > 2) {
 		d->v.vy = 2;
 	}
-	
 	if(contact != NULL) {
 		d->v.vy = -1 * JUMP_SPEED;
 	}
-	if(d->y > SCREEN_HEIGHT) {
-		d->alive = false;
-	}
 	if(d->x < 0 || d->x > SCREEN_WIDTH) {
 		d->x = SCREEN_WIDTH - d->x;
+	}
+	if(d->y > SCREEN_HEIGHT) {
+		d->alive = false;
 	}
 	
 
