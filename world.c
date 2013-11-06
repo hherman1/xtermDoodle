@@ -16,13 +16,14 @@ void newgame(){
 	
 	redisplay();
 }
-void updateWorld(Doodler d, int *score){
-	if(d.y < SCREEN_HEIGHT/3) {
+void updateWorld(Doodler *d, int *score){
+	while(d->y < SCREEN_HEIGHT/3) {
 		*score = *score + 1;
+		d->y++;
 		shiftWorldDown();
+		tick++;
 	}
-	redisplay();
-	tick++;
+		redisplay();
 }
 
 static void redisplay(){

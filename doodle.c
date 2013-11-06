@@ -26,7 +26,7 @@ void main(){
 		int i;
 		int c = getkey();
 		
-		updateWorld(doodles, &distance);
+		updateWorld(&doodles, &distance);
 		updateDoodler(c,&doodles);
 		if(c == KEY_F5 || c == 'q') {
 			getkey_terminate();
