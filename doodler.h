@@ -5,7 +5,7 @@
 
 #define DOODLER_SHAPE " "
 #define JUMP_SPEED 6
-#define MOVEMENT_SPEED 2
+#define MOVEMENT_SPEED 3
 
 #define PF_DEBUG 0
 
