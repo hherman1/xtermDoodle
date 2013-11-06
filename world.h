@@ -14,7 +14,7 @@ static void updatePlatform(Platform* p);
 static void removePlatform(int pos);
 Platform* getPlatform(int x, int y);
 void newgame();
-void updateWorld(Doodler d, int *score);
+void updateWorld(Doodler *d, int *score);
 void setGameSpeed(int speed);
 int getGameSpeed();
 bool isUsed(int x,int y);

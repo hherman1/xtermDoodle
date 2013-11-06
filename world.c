@@ -16,13 +16,14 @@ void newgame(){
 	
 	redisplay();
 }
-void updateWorld(Doodler d, int *score){
-	if(d.y < SCREEN_HEIGHT/3) {
+void updateWorld(Doodler *d, int *score){
+	while(d->y < SCREEN_HEIGHT/3) {
 		*score = *score + 1;
+		d->y++;
 		shiftWorldDown();
+		tick++;
 	}
-	redisplay();
-	tick++;
+		redisplay();
 }
 
 static void redisplay(){
@@ -87,7 +88,7 @@ static void generatePlatform(int row){
 	p.y = row;
 	p.strong = 1;
 	p.v.vy = 0;
-	p.v.vx = (rand() % 2) ? 0 : gameSpeed / 10;
+	p.v.vx = (rand() % 2) ? 0 : gameSpeed / GAMESPEED_SLOW;
 	p.color = (p.v.vx) ? XT_CH_BLUE : XT_CH_GREEN;
 	if(!p.strong)
 		p.color = XT_CH_WHITE;
