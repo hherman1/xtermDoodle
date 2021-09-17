@@ -1,4 +1,5 @@
 #include "world.h"
+#include <stdlib.h>
 
 static char world[SCREEN_HEIGHT][SCREEN_WIDTH+1];
 static Platform platforms[MAX_PLATFORMS];
@@ -113,7 +114,7 @@ static bool contains(Platform p, int x, int y) {
 	return (x <= p.x + PLATFORMS_WIDTH && x >= p.x)  && ( y >= p.y - PLATFORMS_HEIGHT && y <= p.y);
 }
 static void removePlatform(int pos){
-	for(pos; pos < numPlatforms; pos++)
+	for(; pos < numPlatforms; pos++)
 		platforms[pos] = platforms[pos+1];
 	numPlatforms--;
 }

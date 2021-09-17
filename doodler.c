@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "doodler.h"
+#include "world.h"
 #include "game.h"
 
 static void drawDoodler(Doodler d) {
